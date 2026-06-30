@@ -1,6 +1,3 @@
-params.caller = 'TRGT'
-params.trgt_loci = "${projectDir}/catalogues/STRchive-disease-loci.hg38.TRGT.bed"  
-
 workflow run_trgt {
     take:
         sam_bam_ch
@@ -37,3 +34,13 @@ process trgt {
     """
 }
 
+'''
+./trgt plot --genome example/reference.fasta \
+       --repeats example/repeat.bed \
+       --vcf sample.sorted.vcf.gz \
+       --spanning-reads sample.spanning.sorted.bam \
+       --repeat-id TR1 \
+       --image TR1.svg
+
+trgt plot -g /stornext/Bioinf/data/lab_bahlo/ref_db/human/hg38/1000G/GRCh38_full_analysis_set_plus_decoy_hla.fa -b /vast/projects/reidj-project/nf-str/catalogues/STRchive-disease-loci.hg38.TRGT.bed -i SCA27B_FGF14  --vcf /vast/projects/bahlo_longstr/nf-str-output/trgt/NA21110_pacbio.vcf.gz -r /vast/scratch/users/reid.j/trgt/NA21110_pacbio.spanning.sorted.bam
+'''

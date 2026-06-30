@@ -1,5 +1,6 @@
 params.caller = 'LongTR'
-params.longtr_loci = "${projectDir}/catalogues/STRchive-disease-loci.hg38.longTR.bed"  
+params.longtr_loci = "${projectDir}/catalogues/STRchive-disease-loci.hg38.longTR.bed"
+//params.longtr_loci = "/vast/scratch/users/reid.j/nf-str-run/trexplorer-catalog/repeat_catalog_v1.hg38.1_to_1000bp_motifs.bed"  
 
 workflow run_longtr {
     take:
@@ -13,8 +14,8 @@ workflow run_longtr {
 
 process longtr {
     cpus 1
-	memory {'2 GB'}
-	time '5 h'
+	memory {'16 GB'}
+	time '24 h'
     publishDir "output/longtr/", mode: "copy", saveAs: { filename ->  filename.replaceAll("${sam}\\.", "${sam}_${type}.")}
 
     tag "${sam}_${type}"

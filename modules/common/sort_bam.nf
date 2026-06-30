@@ -3,6 +3,8 @@ process index_bam {
     memory '10 GB'
     time '1 hours'
     tag { sam }
+
+    publishDir "output/alignments/", mode: "copy", pattern: "*.{bai,crai}"
     
     input:
     tuple val(sam), val(type), path(bam)

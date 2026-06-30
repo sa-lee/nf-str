@@ -1,15 +1,16 @@
 process download_s3_files {
     tag "${sample}_${type}"
 
-    //publishDir "s3_files/${sample}/${type}", mode: 'copy'
+    publishDir "output/alignments/", mode: 'copy', enabled: "${ !align }"
 
-	module 'awscli'
-	//container 'quay.io/biocontainers/awscli:1.8.3--0' Update when BioContainers back online
+    module 'awscli'
+    container null
+    //container 'quay.io/biocontainers/awscli:1.8.3--py35_0'
 
     cpus 4
     memory '4 GB'
     time '12h'
-    maxForks 20  // Limit to N concurrent downloads
+    maxForks 2  // Limit to N concurrent downloads
 
     input:
     tuple val(sample), val(type), val(s3_uri), val(align)

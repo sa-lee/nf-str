@@ -1,5 +1,3 @@
-params.caller = 'ExpansionHunter'
-
 include { call } from './call.nf'
 include { kmer_filter } from './kmer_filter.nf'
 include { sort_bamlet } from './sort_bamlet.nf'

@@ -1,6 +1,3 @@
-params.caller = 'Straglr'
-params.straglr_loci = "${projectDir}/catalogues/STRchive-disease-loci.hg38.straglr.bed"  
-
 workflow run_straglr {
     take:
         sam_bam_ch
@@ -20,7 +17,6 @@ process straglr {
     
     tag "${sam}_${type}"
 
-    //container '/vast/scratch/users/reid.j/nf-str-run/straglr_1.5.5--pyhdfd78af_0.sif'
     container 'quay.io/biocontainers/straglr:1.5.5--pyhdfd78af_0'
 
     input:
@@ -32,7 +28,6 @@ process straglr {
     script:
     """
         python /usr/local/bin/straglr.py ${bam} ${params.ref_fasta} ${sam} --loci ${params.straglr_loci} 
-       
         #[--loci loci.bed] [--exclude skip_regions.bed] [--chroms chr] [--regions regions.bed] \
         #[--min_support N] [--min_ins_size N] [--min_str_len N] [--max_str_len N] [--nprocs N] \
         #[--genotype_in_size] [--max_num_clusters N] [--min_cluster_size N] [--working_dir] [--tmpdir] [--debug]

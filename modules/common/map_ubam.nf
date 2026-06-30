@@ -1,10 +1,12 @@
 process minimap2_ubam_ont {
-    memory { 40.GB * task.attempt }
+    memory { 60.GB * task.attempt }
     cpus 8
-    errorStrategy { (task.exitStatus == 143 || task.exitStatus == 137) ? 'retry' : 'terminate' }
+    time 96.h
+    queue 'long' 
     maxRetries 2
+    maxForks 40
 
-    publishDir "output/alignments/", mode: "copy"
+    publishDir "output/alignments/", mode: "copy", pattern: "*.{sorted.bam,sorted.bam.bai}"
     
     container 'quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:1679e915ddb9d6b4abda91880c4b48857d471bd8-0'
     
@@ -33,10 +35,10 @@ process minimap2_ubam_ont {
 process minimap2_ubam_pacbio {
     memory { 40.GB * task.attempt }
     cpus 8
-    errorStrategy { (task.exitStatus == 143 || task.exitStatus == 137) ? 'retry' : 'terminate' }
     maxRetries 2
+    maxForks 40
 
-    //publishDir "output/alignments/", mode: "copy", pattern: "*.{bam,bai}"
+    publishDir "output/alignments/", mode: "copy", pattern: "*.{sorted.bam,sorted.bai}"
 
     container 'quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:1679e915ddb9d6b4abda91880c4b48857d471bd8-0'
     
@@ -66,10 +68,9 @@ process minimap2_ubam_pacbio {
 process minimap2_ubam_illumina {
     memory { 40.GB * task.attempt }
     cpus 8
-    errorStrategy { (task.exitStatus == 143 || task.exitStatus == 137) ? 'retry' : 'terminate' }
     maxRetries 2
 
-    publishDir "output/alignments/", mode: "copy", pattern: "*.{bam,bai}"
+    publishDir "output/alignments/", mode: "copy", pattern: "*.{sorted.bam,sorted.bai}"
     
     container 'quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:1679e915ddb9d6b4abda91880c4b48857d471bd8-0'
 

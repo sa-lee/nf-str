@@ -1,5 +1,3 @@
-params.catalog = "${projectDir}/catalogues/ExpansionHunter_hg38.json"  // path to ExpansionHunter catalog, use 'default' for the default catalog
-
 process call {
     cpus 1
 	memory {'2 GB'}
@@ -20,7 +18,7 @@ process call {
         ExpansionHunter \
 		--reads ${bam} \
 		--reference ${params.ref_fasta} \
-		--variant-catalog ${params.catalog} \
+		--variant-catalog ${params.eh5_loci} \
 		--output-prefix ${sam}
     """
 }

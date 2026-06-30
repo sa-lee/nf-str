@@ -1,5 +1,3 @@
-params.catalog = "${projectDir}/catalogues/ExpansionHunter_hg38.json"  
-
 process kmer_filter {
     
     publishDir "output/eh5/kmer_filter/", mode: "copy"
@@ -16,7 +14,7 @@ process kmer_filter {
     out_vcf = "${sam}_validated.vcf"
     out_vcf_tbi = "${sam}_validated.vcf.tbi"
     """
-    python kmer_filter.py --bam ${bamlet_srt} --vcf ${vcf} --catalog ${params.catalog} --auto --keep_lowdepth \
+    python kmer_filter.py --bam ${bamlet_srt} --vcf ${vcf} --catalog ${params.eh5_loci} --auto --keep_lowdepth \
 -o ./${sam}
     tabix -p vcf ${out_vcf}
     """
